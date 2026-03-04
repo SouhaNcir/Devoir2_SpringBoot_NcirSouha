@@ -1,6 +1,5 @@
 package com.souhancir_voitures;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,12 @@ public class VoitureNcirSouhaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	/*public void run(String... args) throws Exception {
 		voitureService.saveProduit(new Voiture( "Audi A4",new Date(11, 2, 18), // 18 Mars 2019
 			    "Noir","Diesel","Automatique",87000.0));
 		voitureService.saveProduit(new Voiture(  "Hyundai i20",new Date(12, 10, 5), // 5 Novembre 2022
@@ -33,6 +38,6 @@ public class VoitureNcirSouhaApplication implements CommandLineRunner{
 			    "Blanc","Diesel","Automatique",110000.0 ));
 		
 		
-	}
+	}*/
 
 }

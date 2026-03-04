@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity 
@@ -21,6 +22,10 @@ public class Voiture {
     private String boiteVitesse;
     private double prixVoiture;
     
+    @ManyToOne
+    private Marque marque;
+
+
 	public Voiture( String modele, Date dateFabrication, String couleur, String typeCarburant,
 			String boiteVitesse, double prixVoiture) {
 		super();
@@ -35,7 +40,15 @@ public class Voiture {
 
 	public Voiture() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Marque getMarque() {
+		return marque;
+	}
+
+
+	public void setMarque(Marque marque) {
+		this.marque = marque;
 	}
 
 

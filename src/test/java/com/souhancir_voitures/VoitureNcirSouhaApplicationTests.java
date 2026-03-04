@@ -8,45 +8,114 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 
-import com.souhancir_voitures.repos.VoitureReporsitory;
+import com.souhancir_voitures.repos.VoitureRepository;
 import com.souhancir_voitures.service.VoitureService;
+import com.souhancir_voitures.entities.Marque;
 import com.souhancir_voitures.entities.Voiture;
 
 @SpringBootTest
 class VoitureNcirSouhaApplicationTests {
 	@Autowired
-	private VoitureReporsitory VoitureReporsitory;
+	private VoitureRepository VoitureRepository;
 	private VoitureService voitureService ;
 
 	@Test
 	public void testCreateVoiture(){ 
 		Voiture voi = new Voiture("Peugeot 208",new Date(),"Blanc",
 			    "Diesel","Manuelle",18900.0);
-		Voiture saved = VoitureReporsitory.save(voi);
+		Voiture saved = VoitureRepository.save(voi);
         System.out.println("ID généré = " + saved.getIdVoiture());
 	}
 	@Test
-	public void testFindVoiture(){
-		Voiture v = VoitureReporsitory.findById(3L).get();
+	public void testFindAllVoiture(){
+		Voiture v = VoitureRepository.findById(3L).get();
 		System.out.println(v);
 	}
+	
+	@Test
+	public void testfindByModelePrix(){
+		List<Voiture> vs = VoitureRepository.findByModelePrix("Audi A4", 18900.0); 
+		  for (Voiture v : vs)
+		    {
+			  System.out.println(v);
+		    }			
+	}
+	
+	@Test
+	public void testFindVoitureByModeleContains(){
+		List<Voiture> vs = VoitureRepository.findByModeleContains("u "); 
+		  for (Voiture v : vs)
+		    {
+			  System.out.println(v);
+		    }			
+	}
+	@Test
+	public void testFindVoitureByModele(){
+		List<Voiture> vs = VoitureRepository.findByModele("Toyota Corolla"); 
+		  for (Voiture v : vs)
+		    {
+			  System.out.println(v);
+		    }			
+	}
+	
+	@Test
+	public void testfindByMarque()
+	{
+		Marque mar = new Marque();
+		mar.setIdMar(1L);
+		List<Voiture> voits= VoitureRepository.findByMarque(mar);
+		for (Voiture v : voits)
+	    {
+		  System.out.println(v);
+	    }	
+	}
+
+	@Test
+	public void findByMarqueIdMar()
+	{
+		List<Voiture> voits= VoitureRepository.findByMarqueIdMar(1L);
+		for (Voiture v : voits)
+	    {
+		  System.out.println(v);
+	    }
+	 }
+	
+	@Test
+	public void findByOrderByModeleAsc() {
+		List<Voiture> voits= VoitureRepository.findByOrderByModeleAsc();
+		for (Voiture v : voits)
+	    {
+		  System.out.println(v);
+	    }
+	}
+	
+	@Test
+	public void testTrierVoitureModelePrix() {
+		List<Voiture> voits= VoitureRepository.trierVoitureModelePrix();
+		for (Voiture v : voits)
+	    {
+		  System.out.println(v);
+	    }
+	}
+	
 	
 	@Test
 	public void testUpdateVoiture(){
-		Voiture v = VoitureReporsitory.findById(3L).get();
+		Voiture v = VoitureRepository.findById(3L).get();
 		v.setPrixVoiture(500000.0);
-		VoitureReporsitory.save(v);
+		VoitureRepository.save(v);
 		System.out.println(v);
 	}
 	
+	
 	@Test
 	public void testDeleteVoiture() {
-		VoitureReporsitory.deleteById(2L);
+		VoitureRepository.deleteById(2L);
 	}
 	
 	@Test
 	public void testListerTousVoiture() {
-		List<Voiture> voits = VoitureReporsitory.findAll();
+		List<Voiture> voits = VoitureRepository.findAll();
 		for(Voiture v : voits) {
 			System.out.println(v);
 		}
@@ -65,8 +134,7 @@ class VoitureNcirSouhaApplicationTests {
 	    }			
 		
 	}
-
 	
-
 	
+		
 }
